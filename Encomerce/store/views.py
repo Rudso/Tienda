@@ -27,9 +27,10 @@ def categories(request):
 
 
 def list_categorys(request,category_slug=None):
+    categorys= Category.objects.all()
     categor= get_object_or_404(Category,slug=category_slug)
     productos = Product.objects.filter(category=categor)
-    return render(request,'list-category.html',{'categor':categor,'productos':productos})
+    return render(request,'list-category.html',{'categor':categor,'productos':productos,'category':categorys})
     
         
 def product_info(request, slug):

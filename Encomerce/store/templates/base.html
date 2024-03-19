@@ -70,20 +70,21 @@
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     
-                        Categories
+                        Categorias
                     
                     </a>
                     
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <li>                            
-                            <a class="dropdown-item" href="#"> All </a>                            
-                        </li>
-                        {% for categorys in category %}
+                         {% for categorys in category %}
                         <li>
                             <a class="dropdown-item" href={{categorys.get_absolute_url}}>{{categorys.name}}</a>                                  
                         </li>
                         {% endfor %} 
+
+                        <li>                            
+                            <a class="dropdown-item" href="#"> All </a>                            
+                        </li>
+                       
                         
                     </ul>
 
@@ -118,12 +119,26 @@
 
 
                 <li class="nav-item">
-
+ 
                     <a type="button" role="button" href="{% url 'cart:cart-index' %}" class="btn btn-outline-secondary"> 
                     
 
 
                         <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                        &nbsp;
+
+
+                        <div id="cart-qty" class="d-inline-flex">
+                            {% with qty_amount=cart|length %}
+                                {% if qty_amount > 0 %}
+                                    {{ qty_amount }}
+                                    {% else %}
+                                    0
+                                {% endif %}   
+                            {% endwith %}     
+
+
+                        </div>
 
 
                     </a>
